@@ -8,7 +8,6 @@ import SettingsModal from '@components/Settings'
 
 function App() {
   const [shared, setShared] = useState<string | null>(null)
-  const [settingsVisible, setSettingsVisibility] = useState(false)
 
   const updateSharedUrl = (_: any, url: string) => {
     setShared(url)
@@ -35,12 +34,12 @@ function App() {
   return (
     <>
       <nav>
-        <Nav showSettings={() => setSettingsVisibility(true)}/>
+        <Nav/>
       </nav>
       <main className='space-y-6'>
         <Dropzone onChange={folderSelection} />
       </main>
-      <SettingsModal hidden={settingsVisible} onClose={() => setSettingsVisibility(false)}/>
+      <SettingsModal/>
       <SharingModal shared={shared} onStop={stopSharing}/>
       
       {/*<Update/>*/}
