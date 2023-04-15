@@ -2,11 +2,11 @@ import {CrossIcon} from "@icons";
 
 interface ModalProps {
     id?: string;
-    hidden: boolean;
+    hidden?: boolean;
     title: string;
     body: any;
     footer: any;
-    onClose: () => void;
+    onClose?: () => void;
 }
 
 const Modal = ({id, hidden, title, body, footer, onClose}: ModalProps) => {

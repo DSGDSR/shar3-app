@@ -4,6 +4,9 @@ import App from './App'
 import './samples/node-api'
 import './index.scss'
 import 'flowbite'
+import dayjs from 'dayjs'
+
+dayjs.extend(require('dayjs/plugin/relativeTime'))
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

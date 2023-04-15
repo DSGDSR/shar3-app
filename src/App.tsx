@@ -3,15 +3,16 @@ import Dropzone from '@components/Dropzone'
 import Nav from '@components/Nav'
 import SharingModal from '@components/Sharing'
 import { ipcRenderer } from 'electron'
-import { ShareEvents } from '@shared'
+import { History, ShareEvents } from '@shared'
 import SettingsModal from '@components/Settings'
+import useLocalStorage from './hooks/useLocalStorage'
+import HistoryTable from '@components/HistoryTable'
 
 function App() {
   const [shared, setShared] = useState<string | null>(null)
+  const {value: history, setValue: setHistory} = useLocalStorage<History>('history', [])
 
-  const updateSharedUrl = (_: any, url: string) => {
-    setShared(url)
-  }
+  const updateSharedUrl = (_: any, url: string) => setShared(url)
 
   useEffect(() => {
     ipcRenderer.on(ShareEvents.SendShareUrl, updateSharedUrl)
@@ -21,9 +22,12 @@ function App() {
     }
   }, [])
 
-  const folderSelection = (event: any) => {
-    const path = event.target.files[0].path.slice(0, event.target.files[0].path.lastIndexOf('/'))
+  const onUpload = (path: string) => {
     ipcRenderer.invoke(ShareEvents.ShareDirectory, path)
+    setHistory((currHistory) => ([{
+      path,
+      sharedAt: Date.now()
+    }, ...currHistory]));
   }
 
   const stopSharing = () => {
@@ -37,10 +41,11 @@ function App() {
         <Nav/>
       </nav>
       <main className='space-y-6'>
-        <Dropzone onChange={folderSelection} />
+        <Dropzone onUpload={onUpload} />
+        <HistoryTable history={history} />
       </main>
       <SettingsModal/>
-      <SharingModal shared={shared} onStop={stopSharing}/>
+      <SharingModal shared={shared} onStop={stopSharing} />
       
       {/*<Update/>*/}
     </>
