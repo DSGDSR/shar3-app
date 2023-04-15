@@ -1,7 +1,9 @@
+/*
+TO REDO / REMOVE
 .modalslot {
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   :global {
     .update-progress {
@@ -28,4 +30,4 @@
       text-align: center;
     }
   }
-}
+}*/

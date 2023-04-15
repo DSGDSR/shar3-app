@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import styles from './modal.module.scss'
+import styles from './modal.module.css'
 import { CrossIcon } from '@icons'
 
 const ModalTemplate: React.FC<React.PropsWithChildren<{
