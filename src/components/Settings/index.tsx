@@ -3,11 +3,6 @@ import { Settings } from '@shared';
 import { useLocalStorage, useTheme } from '@hooks';
 import SettingsCheckbox from './Checkbox';
 
-interface SettingsModalProps {
-    hidden: boolean;
-    onClose: () => void
-}
-
 export const defaultSettings: Settings = {
     publicShare: false,
     theme: 'dark',
@@ -15,7 +10,7 @@ export const defaultSettings: Settings = {
     shortcuts: true
 }
 
-const SettingsModal = ({ hidden, onClose }: SettingsModalProps) => {
+const SettingsModal = () => {
     const {value: settings, setValue: setSettings} = useLocalStorage<Settings>('settings', defaultSettings)
     const {setTheme} = useTheme()
 
@@ -32,7 +27,7 @@ const SettingsModal = ({ hidden, onClose }: SettingsModalProps) => {
 
     return (
         <Modal
-            hidden={hidden}
+            id="settings"
             title='Settings'
             body={<>
                 <section>
@@ -89,7 +84,6 @@ const SettingsModal = ({ hidden, onClose }: SettingsModalProps) => {
                 </section>
             </>}
             footer={<></>}
-            onClose={onClose}
         />
     )
 }

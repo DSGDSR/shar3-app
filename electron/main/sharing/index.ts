@@ -9,7 +9,6 @@ const basicAuth = require('express-basic-auth');
 const ngrok = require('ngrok');
 
 let server;
-let window: BrowserWindow;
 
 const getLocalAddress = (): string => {
     // TODO any interface
@@ -43,7 +42,7 @@ const closeServer = (): void => {
     })
 }
 
-const startServer = async (event: IpcMainInvokeEvent, path: string): Promise<void> => {
+const startServer = async (event: IpcMainInvokeEvent, path: string, window: BrowserWindow): Promise<void> => {
     const port = await portfinder.getPortPromise(config.portfinder)
     const settings = await config.getUserSettings(window)
 
@@ -66,10 +65,7 @@ const startServer = async (event: IpcMainInvokeEvent, path: string): Promise<voi
 }
 
 export default (window: BrowserWindow) => {
-    // Bind window
-    window = window;
-
     ipcMain.handle(ShareEvents.StopSharing, closeServer)
 
-    ipcMain.handle(ShareEvents.ShareDirectory, startServer)
+    ipcMain.handle(ShareEvents.ShareDirectory, (event, path) => startServer(event, path, window))
 }
