@@ -19,7 +19,7 @@ const SettingsModal = () => {
             setTheme(value)
         }
 
-        setSettings((oldConfig: Settings) => ({
+        setSettings((oldConfig) => ({
             ...oldConfig,
             [key]: value ?? null
         }));

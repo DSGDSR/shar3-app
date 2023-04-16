@@ -7,7 +7,11 @@ import { ShareEvents } from "@shared";
 import { ipcRenderer } from "electron";
 import { useEffect, useRef } from "react";
 
-const Dropzone = ({ onChange }: any) => {
+interface DropzoneProps {
+    onUpload: (path: string) => void
+}
+
+const Dropzone = ({ onUpload }: DropzoneProps) => {
     const ref = useRef<HTMLInputElement>(null)
     const {getValue: getSettings} = useLocalStorage('settings', defaultSettings)
 
@@ -34,9 +38,18 @@ const Dropzone = ({ onChange }: any) => {
         }
     }, [ref])
 
+    const onShare = (target: HTMLInputElement) => {
+        const path = target?.files?.[0].path.slice(0, target?.files?.[0].path.lastIndexOf('/'))
+        if (path) {
+            onUpload(path)
+        } else {
+            // TODO path upload error
+        }
+    }
+
     return (
         <div className="flex items-center justify-center w-full">
-            <label htmlFor="dropzone-file" className="flex flex-col items-center px-4 justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <label tabIndex={1} htmlFor="dropzone-file" className="flex flex-col items-center px-4 justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-800 hover:bg-gray-200 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-700">
                 <div className="flex flex-col items-center justify-center pt-4 pb-5">
                     <UploadIcon className="mb-3"/>
                     <p className="mt-3 text-sm text-center text-gray-500 dark:text-gray-400">
@@ -50,7 +63,7 @@ const Dropzone = ({ onChange }: any) => {
                         </p> : <></>
                     } 
                 </div>
-                <input id="dropzone-file" type="file" className="hidden" ref={ref} onChange={onChange} />
+                <input id="dropzone-file" type="file" className="hidden" ref={ref} onChange={() => onShare(event?.target as HTMLInputElement)} />
             </label>
         </div> 
     )

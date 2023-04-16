@@ -10,6 +10,10 @@ html.dark body {
   background-color: #111827;
 }
 
+.rtl {
+  direction: rtl;
+}
+
 *::-webkit-scrollbar {
   width: 12px;
 }
