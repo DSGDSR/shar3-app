@@ -56,9 +56,9 @@ const startServer = async (event: IpcMainInvokeEvent, path: string, window: Brow
 
     let url;
     if (settings.publicShare) {
-        url = await ngrok.connect({ addr: port, authtoken: import.meta.env.VITE_NGROK_API_TOKEN })
+        url = `${await ngrok.connect({ addr: port, authtoken: import.meta.env.VITE_NGROK_API_TOKEN })}?timeToken=${Date.now()}`
     } else {
-        url = `http://${getLocalAddress()}:${port}`
+        url = `http://${getLocalAddress()}:${port}?timeToken=${Date.now()}`
     }
 
     event.sender.send(ShareEvents.SendShareUrl, url)

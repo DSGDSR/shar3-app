@@ -40,7 +40,7 @@ function App() {
       <nav>
         <Nav/>
       </nav>
-      <main className='space-y-6'>
+      <main className='space-y-6 pb-20'>
         <Dropzone onUpload={onUpload} />
         <HistoryTable history={history} />
       </main>
