@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './progress.module.scss'
+import styles from './progress.module.css'
 
 const Progress: React.FC<React.PropsWithChildren<{
   percent?: number
