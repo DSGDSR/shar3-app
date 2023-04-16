@@ -9,3 +9,22 @@ body {
 html.dark body {
   background-color: #111827;
 }
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #acacac;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+html.dark *::-webkit-scrollbar-thumb {
+  background-color: #898f9a;
+}
