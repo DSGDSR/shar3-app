@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow-x: hidden;
+  width: 100vw;
+}
+
 body {
   background-color: #f9fafb;
 }
@@ -14,7 +19,7 @@ html.dark body {
   direction: rtl;
 }
 
-*::-webkit-scrollbar {
+/**::-webkit-scrollbar {
   width: 12px;
 }
 
@@ -31,4 +36,4 @@ html.dark body {
 
 html.dark *::-webkit-scrollbar-thumb {
   background-color: #898f9a;
-}
+}*/

@@ -1,3 +1,5 @@
+import { Settings } from "../../shared"
+
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
   return new Promise(resolve => {
     if (condition.includes(document.readyState)) {
@@ -31,42 +33,74 @@ const safeDOM = {
  * https://projects.lukehaas.me/css-loaders
  * https://matejkustec.github.io/SpinThatShit
  */
-function useLoading() {
-  const className = `loaders-css__square-spin`
+const useLoading = () => {
+  let settings: Settings;
+  try {
+    settings = JSON.parse(localStorage.getItem('settings')) ?? null
+  } catch {
+    settings = null
+  }
+
+  console.log(settings)
   const styleContent = `
-@keyframes square-spin {
-  25% { transform: perspective(100px) rotateX(180deg) rotateY(0); }
-  50% { transform: perspective(100px) rotateX(180deg) rotateY(180deg); }
-  75% { transform: perspective(100px) rotateX(0) rotateY(180deg); }
-  100% { transform: perspective(100px) rotateX(0) rotateY(0); }
-}
-.${className} > div {
-  animation-fill-mode: both;
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  animation: square-spin 3s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;
-}
-.app-loading-wrap {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #282c34;
-  z-index: 9;
-}
-    `
+    .ring {
+      --uib-size: 55px;
+      --uib-speed: 2s;
+      --uib-color: ${settings?.theme === 'light' ? '#111827' : '#f9fafb'};
+      
+      height: var(--uib-size);
+      width: var(--uib-size);
+      vertical-align: middle;
+      transform-origin: center;
+      animation: rotate var(--uib-speed) linear infinite;
+    }
+    
+    .ring circle {
+      fill: none;
+      stroke: var(--uib-color);
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      animation: stretch calc(var(--uib-speed) * 0.75) ease-in-out infinite;
+    }
+    
+    @keyframes rotate { 100% { transform: rotate(360deg); } }
+    
+    @keyframes stretch {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 90, 200;
+        stroke-dashoffset: -35px;
+      }
+      100% {
+        stroke-dashoffset: -124px;
+      }
+    }
+  
+    .app-loading-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: ${settings?.theme === 'light' ? '#f9fafb' : '#111827'};
+      z-index: 10;
+    }`
   const oStyle = document.createElement('style')
   const oDiv = document.createElement('div')
 
   oStyle.id = 'app-loading-style'
   oStyle.innerHTML = styleContent
   oDiv.className = 'app-loading-wrap'
-  oDiv.innerHTML = `<div class="${className}"><div></div></div>`
+  oDiv.innerHTML = `<svg class="ring" viewBox="25 25 50 50" stroke-width="5">
+    <circle cx="50" cy="50" r="20" />
+  </svg>`
 
   return {
     appendLoading() {
@@ -79,8 +113,6 @@ function useLoading() {
     },
   }
 }
-
-// ----------------------------------------------------------------------
 
 const { appendLoading, removeLoading } = useLoading()
 domReady().then(() => {
