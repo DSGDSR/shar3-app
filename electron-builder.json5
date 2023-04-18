@@ -4,8 +4,6 @@
 {
   "appId": "me.dsgdsr.shar3",
   "asar": true,
-  "compression": "maximum",
-  "includeSubNodeModules": false,
   "directories": {
     "output": "release/${version}"
   },
