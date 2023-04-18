@@ -2,8 +2,10 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  "appId": "YourAppID",
+  "appId": "me.dsgdsr.shar3",
   "asar": true,
+  "compression": "maximum",
+  "includeSubNodeModules": false,
   "directories": {
     "output": "release/${version}"
   },

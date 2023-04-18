@@ -1,6 +1,6 @@
 import { FolderIcon } from "@icons"
 import { History, HistoryItem, ShareEvents } from "@shared"
-import dayjs from "dayjs"
+import { RelativeTime } from "@utils"
 import { ipcRenderer } from "electron"
 import { useState } from "react"
 
@@ -10,6 +10,8 @@ interface HistoryProps {
 
 const evenClasses = 'flex py-[1.15rem] border-b bg-gray-100 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 hover:cursor-pointer first:rounded-t-md last:rounded-b-md'
 const oddClasses = 'flex py-[1.15rem] bg-white bg-gray-50 border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 hover:cursor-pointer last:rounded-b-md'
+
+const relativeTime = new RelativeTime()
 
 const HistoryTable = ({history}: HistoryProps) => {
     const [visibleItems, setVisibleItems] = useState(5)
@@ -36,7 +38,7 @@ const HistoryTable = ({history}: HistoryProps) => {
                             </div>
                         </th>
                         <td className="flex items-center pr-6 pl-4 w-2/6 lg:w-1/6 justify-end">
-                            {dayjs(historyItem.sharedAt).fromNow()}
+                            {relativeTime.from(new Date(historyItem.sharedAt))}
                         </td>
                     </tr>
                 }) }

@@ -3,13 +3,17 @@ import { ShareEvents } from "@shared";
 import { ipcRenderer } from "electron";
 import NavItem from "./NavItem";
 
-const Nav = () => {
+interface NavProps {
+    toggleSettings: (state: boolean) => void
+}
+
+const Nav = ({toggleSettings}: NavProps) => {
     const openExplorer = (): void => {
         ipcRenderer.emit(ShareEvents.OpenExplorer)
     }
 
     return (
-        <div className="fixed z-50 w-72 max-w-[90%] h-16 -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+        <div className="fixed z-50 w-72 max-w-[90%] h-16 shadow-md -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
             <div className="grid h-full max-w-lg grid-cols-3 mx-auto">
                 <NavItem key={'nav-theme'} title="Theme" icon={<SunIcon/>} />
                 
@@ -20,7 +24,7 @@ const Nav = () => {
                     </button>
                 </div>
                 
-                <NavItem key={'nav-settings'} id="settings" title="Settings" icon={<SettingsIcon/>} />
+                <NavItem key={'nav-settings'} title="Settings" icon={<SettingsIcon/>} onClick={() => toggleSettings(true)}/>
             </div>
         </div>
     );

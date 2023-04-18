@@ -41,7 +41,6 @@ const useLoading = () => {
     settings = null
   }
 
-  console.log(settings)
   const styleContent = `
     .ring {
       --uib-size: 55px;

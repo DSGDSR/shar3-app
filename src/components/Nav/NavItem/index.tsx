@@ -1,21 +1,21 @@
-import Tooltip from "@components/Tooltip"
+import { Tooltip } from "flowbite-react"
 
 interface NavItemProps {
-    id?: string
     title: string
     icon: any
-    onClick?: React.MouseEventHandler<HTMLButtonElement>
+    onClick?: () => void
     className?: string
 }
 
-const NavItem = ({id, title, icon, onClick, className}: NavItemProps) => {
-    return <>
-        <button data-modal-target={`${id}-modal`} data-modal-show={`${id}-modal`} id="theme-toggle" data-tooltip-target={`tooltip-${title}`} type="button" className={`inline-flex flex-col items-center justify-center px-5 rounded-l-full rounded-r-full group ${className ?? ''}`} {...(onClick ? onClick : null)}>
-            { icon }
-            <span className="sr-only">{title}</span>
-        </button>
-        <Tooltip id={`tooltip-${title}`} text={title} />
-    </>
+const NavItem = ({title, icon, onClick, className}: NavItemProps) => {
+    return <div tabIndex={1} className={`cursor-pointer inline-flex flex-col h-full items-center rounded-l-full rounded-r-full justify-center group ${className ?? ''}`} onClick={onClick}>
+        <Tooltip content={title} arrow={false} className="!-top-10">
+            <button type="button" className="px-5 h-full">
+                { icon }
+                <span className="sr-only">{title}</span>
+            </button>
+        </Tooltip>
+    </div>
 }
 
 export default NavItem
