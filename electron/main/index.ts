@@ -1,8 +1,9 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, Tray, nativeTheme } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 import { update } from './update'
 import sharing from './sharing'
+import { constructTray } from './tray'
 
 // The built directory structure
 //
@@ -36,6 +37,7 @@ if (!app.requestSingleInstanceLock()) {
 // Read more on https://www.electronjs.org/docs/latest/tutorial/security
 // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
+let tray: Tray | null = null
 let win: BrowserWindow | null = null
 // Here, you can also use other preload
 const preload = join(__dirname, '../preload/index.js')
@@ -46,11 +48,17 @@ async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
     icon: join(process.env.PUBLIC, 'favicon.ico'),
-    width: process.env.VITE_DEV_SERVER_URL ? 900 : 525,
+    width: 525,
     minWidth: 525,
-    height: process.env.VITE_DEV_SERVER_URL ? 700 : 600,
+    height: 600,
     minHeight: 450,
+    show: false,
+    frame: false,
+    fullscreenable: false,
+    resizable: false,
+    transparent: true,
     webPreferences: {
+      backgroundThrottling: false,
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
       // Consider using contextBridge.exposeInMainWorld
@@ -59,11 +67,9 @@ async function createWindow() {
       contextIsolation: false,
     },
   })
-
-  if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
+  
+  if (process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(url)
-    // Open devTool if the app is not packaged
-    win.webContents.openDevTools()
   } else {
     win.loadFile(indexHtml)
   }
@@ -79,6 +85,14 @@ async function createWindow() {
     return { action: 'deny' }
   })
 
+  // Hide the window when it loses focus
+  win.on('blur', () => {
+    if (!win.webContents.isDevToolsOpened()) {
+      win.hide()
+      // win.close() TODO recreate window
+    }
+  })
+
   // Apply electron-updater
   update(win)
 
@@ -86,7 +100,54 @@ async function createWindow() {
   sharing(win)
 }
 
-app.whenReady().then(createWindow)
+const getWindowPosition = () => {
+  const windowBounds = win.getBounds()
+  const trayBounds = tray.getBounds()
+
+  // Center window horizontally below the tray icon
+  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
+
+  // Position window 4 pixels vertically below the tray icon
+  const y = Math.round(trayBounds.y + trayBounds.height + 4)
+
+  return {x: x, y: y}
+}
+
+const showWindow = () => {
+  const position = getWindowPosition()
+  win.setPosition(position.x, position.y, false)
+  win.show()
+  win.focus()
+}
+
+const toggleWindow = () => {
+  if (win.isVisible()) {
+    win.hide()
+  } else {
+    showWindow()
+  }
+}
+
+const createTray = () => {
+  tray = constructTray(nativeTheme.themeSource)
+  tray.on('right-click', toggleWindow)
+  tray.on('double-click', toggleWindow)
+  tray.on('click', function (event) {
+    toggleWindow()
+
+    // Show devtools when command clicked
+    if (win.isVisible() && process.defaultApp && event.metaKey && process.env.VITE_DEV_SERVER_URL) {
+      win.webContents.openDevTools({mode: 'detach'})
+    }
+  })
+}
+
+// Don't show the app in the doc
+app.dock.hide()
+app.whenReady().then(() => {
+  createTray()
+  createWindow()
+})
 
 app.on('window-all-closed', () => {
   win = null
@@ -101,14 +162,14 @@ app.on('second-instance', () => {
   }
 })
 
-app.on('activate', () => {
+/*app.on('activate', () => {
   const allWindows = BrowserWindow.getAllWindows()
   if (allWindows.length) {
     allWindows[0].focus()
   } else {
     createWindow()
   }
-})
+})*/
 
 // New window example arg: new windows url
 ipcMain.handle('open-win', (_, arg) => {
