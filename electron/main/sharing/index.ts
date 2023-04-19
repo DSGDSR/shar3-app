@@ -1,6 +1,6 @@
 import { Settings, ShareEvents } from "../../../shared"
 import config from "./config"
-import { BrowserWindow, IpcMainInvokeEvent, ipcMain } from 'electron'
+import { BrowserWindow, IpcMainInvokeEvent, ipcMain, shell } from 'electron'
 const os = require('node:os')
 const portfinder = require('portfinder')
 const express = require('express')
@@ -68,4 +68,6 @@ export default (window: BrowserWindow) => {
     ipcMain.handle(ShareEvents.StopSharing, closeServer)
 
     ipcMain.handle(ShareEvents.ShareDirectory, (event, path) => startServer(event, path, window))
+
+    ipcMain.handle('open-link', (_event, url: string) => shell.openExternal(url))
 }
