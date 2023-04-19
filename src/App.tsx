@@ -8,11 +8,13 @@ import useLocalStorage from './hooks/useLocalStorage'
 import HistoryTable from '@components/HistoryTable'
 import Loader from '@components/Loader'
 import SettingsModal from '@components/Settings'
+import { useT } from 'talkr'
 
 function App() {
   const [settings, toggleSettings] = useState(false)
   const [shared, setShared] = useState<string | null>(null)
   const {value: history, setValue: setHistory} = useLocalStorage<History>('history', [])
+  const {T} = useT()
 
   const updateSharedUrl = (_: any, url: string): void => {
     ipcRenderer.emit(LoaderState.StopLoading)
@@ -46,13 +48,13 @@ function App() {
       <Loader/>
 
       <nav>
-        <Nav toggleSettings={toggleSettings}/>
+        <Nav toggleSettings={toggleSettings} T={T}/>
       </nav>
       <main className='space-y-6 pb-20'>
         <Dropzone onUpload={onUpload} />
         <HistoryTable history={history} />
       </main>
-      <SettingsModal show={settings} onClose={() => toggleSettings(false)}/>
+      <SettingsModal T={T} show={settings} onClose={() => toggleSettings(false)}/>
       <SharingModal shared={shared} onStop={stopSharing} />
       
       {/*<Update/>*/}

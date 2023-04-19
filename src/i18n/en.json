@@ -1,0 +1,25 @@
+{
+    "locales": {
+        "en": "English",
+        "es": "Spanish",
+        "de": "Deutch"
+    },
+    "nav": {
+        "theme": "Theme",
+        "new_item": "Upload new",
+        "settings": "Settings"
+    },
+    "settings": {
+        "title": "Settings",
+        "general_settings": "General settings",
+        "public_share": "Public share",
+        "public_share_tooltip": "When enabled files will be shared outside of your local network using a public url, useful if you want to share things with your friends ✨",
+        "dark_theme": "Dark theme",
+        "auth": "Auth credentials",
+        "auth_username": "User name",
+        "auth_password": "Password",
+        "auth_warning": "You need to add both username and password for auth to be enabled",
+        "other_settings": "Other settings",
+        "shortcuts": "Shortcuts"
+    }
+}

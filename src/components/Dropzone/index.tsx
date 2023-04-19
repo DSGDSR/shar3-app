@@ -1,9 +1,8 @@
 import Kbd from "@components/Kbd"
-import { defaultSettings } from "@components/Settings"
 import { useLocalStorage } from "@hooks"
 import { UploadIcon } from "@icons"
 import useHotkeys from "@reecelucas/react-use-hotkeys"
-import { LoaderState, ShareEvents } from "@shared"
+import { LoaderState, Settings, ShareEvents } from "@shared"
 import { ipcRenderer } from "electron"
 import { useEffect, useRef } from "react"
 
@@ -13,7 +12,7 @@ interface DropzoneProps {
 
 const Dropzone = ({ onUpload }: DropzoneProps) => {
     const ref = useRef<HTMLInputElement>(null)
-    const {getValue: getSettings} = useLocalStorage('settings', defaultSettings)
+    const {getValue: getSettings} = useLocalStorage<Settings | null>('settings', null)
 
     const openExplorer = (): void => {
         setLoading()
@@ -21,7 +20,7 @@ const Dropzone = ({ onUpload }: DropzoneProps) => {
     }
 
     useHotkeys(["Control+u", "Meta+u"], () => {
-      if (getSettings().shortcuts) {
+      if (getSettings()?.shortcuts !== false) {
         openExplorer()
       }
     })
@@ -64,7 +63,7 @@ const Dropzone = ({ onUpload }: DropzoneProps) => {
                         <span className="font-semibold">Click to select</span> or drag the folder here
                     </p>
                     {
-                        getSettings().shortcuts ? <p className="text-center mt-4">
+                        getSettings()?.shortcuts !== false ? <p className="text-center mt-4">
                             <span className="text-gray-500 dark:text-gray-400">
                                 <Kbd>Ctrl</Kbd> + <Kbd>U</Kbd> <span className="text-xs mx-2">or</span> <Kbd>Cmd</Kbd> + <Kbd>U</Kbd>
                             </span>

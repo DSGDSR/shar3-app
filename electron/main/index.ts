@@ -47,7 +47,7 @@ async function createWindow() {
     title: 'Main window',
     icon: join(process.env.PUBLIC, 'favicon.ico'),
     width: process.env.VITE_DEV_SERVER_URL ? 900 : 525,
-    minWidth: 525,
+    minWidth: 400,
     height: process.env.VITE_DEV_SERVER_URL ? 700 : 600,
     minHeight: 450,
     webPreferences: {

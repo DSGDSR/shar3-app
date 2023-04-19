@@ -1,0 +1,25 @@
+{
+    "locales": {
+        "en": "Inglés",
+        "es": "Español",
+        "de": "Alemán"
+    },
+    "nav": {
+        "theme": "Tema",
+        "new_item": "Subir nuevo",
+        "settings": "Opciones"
+    },
+    "settings": {
+        "title": "Configuración",
+        "general_settings": "Opciones generales",
+        "public_share": "Compartir publicamente",
+        "public_share_tooltip": "Si lo activas tus ficheros se compartirán fuera de la red local, accesible desde cualquier lugar. Muy útil si quieres compartir cosas con tus amigos ✨",
+        "dark_theme": "Tema oscuro",
+        "auth": "Autentificación",
+        "auth_username": "Nombre de usuario",
+        "auth_password": "Contraseña",
+        "auth_warning": "Es obligatorio añadir un usuario y una contraseña",
+        "other_settings": "Otras opciones",
+        "shortcuts": "Atajos de teclado"
+    }
+}
