@@ -20,6 +20,7 @@
         "auth_password": "Password",
         "auth_warning": "You need to add both username and password for auth to be enabled",
         "other_settings": "Other settings",
-        "shortcuts": "Shortcuts"
+        "shortcuts": "Shortcuts",
+        "language": "Language"
     }
 }

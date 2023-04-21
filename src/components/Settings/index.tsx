@@ -46,7 +46,6 @@ const SettingsModal = ({show, onClose, T}: SettingsModalProps) => {
             <Modal.Body>
                 <section className="space-y-4 mb-6">
                     <h4 className='text-md font-semibold text-gray-900 dark:text-white'>{T('settings.general_settings')}</h4>
-                    <LanguageSelector T={T} onChange={(locale: Locale) => handleChange('locale', locale)} />
                     <SettingsCheckbox label={T('settings.public_share')} isChecked={settings.publicShare}
                         onChange={(event) => handleChange('publicShare', event.target.checked)}
                         info={T('settings.public_share_tooltip')}
@@ -96,6 +95,11 @@ const SettingsModal = ({show, onClose, T}: SettingsModalProps) => {
                     <SettingsCheckbox label={T('settings.shortcuts')} isChecked={settings.shortcuts}
                         onChange={(event) => handleChange('shortcuts', event.target.checked)}
                     />
+                </section>
+
+                <section className="space-y-4">
+                    <h4 className='text-md font-semibold text-gray-900 dark:text-white'>{T('settings.language')}</h4>
+                    <LanguageSelector T={T} onChange={(locale: Locale) => handleChange('locale', locale)} />
                 </section>
             </Modal.Body>
         </Modal>

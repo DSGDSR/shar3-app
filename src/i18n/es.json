@@ -20,6 +20,7 @@
         "auth_password": "Contraseña",
         "auth_warning": "Es obligatorio añadir un usuario y una contraseña",
         "other_settings": "Otras opciones",
-        "shortcuts": "Atajos de teclado"
+        "shortcuts": "Atajos de teclado",
+        "language": "Idioma"
     }
 }
