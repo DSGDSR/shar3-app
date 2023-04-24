@@ -1,9 +1,13 @@
-import { Settings } from '@shared';
+import { Locale, Settings, Translator } from '@shared';
 import { useLocalStorage, useTheme } from '@hooks';
 import SettingsCheckbox from './Checkbox';
 import { Modal } from 'flowbite-react';
+import LanguageSelector from '@components/LanguageSelector';
+import TextInput from './TextInput';
+import { debounce } from '@utils';
 
-export const defaultSettings: Settings = {
+const defaultSettings: Settings = {
+    locale: 'en',
     publicShare: false,
     theme: 'dark',
     auth: null,
@@ -13,9 +17,10 @@ export const defaultSettings: Settings = {
 interface SettingsModalProps {
     show: boolean
     onClose: () => void
+    T: Translator
 }
 
-const SettingsModal = ({show, onClose}: SettingsModalProps) => {
+const SettingsModal = ({show, onClose, T}: SettingsModalProps) => {
     const {value: settings, setValue: setSettings} = useLocalStorage<Settings>('settings', defaultSettings)
     const {setTheme} = useTheme()
 
@@ -37,62 +42,65 @@ const SettingsModal = ({show, onClose}: SettingsModalProps) => {
           onClose={onClose}
           className="h-screen"
         >
-            <Modal.Header>Settings</Modal.Header>
+            <Modal.Header>{T('settings.title')}</Modal.Header>
             <Modal.Body>
-                <>
-                    <section>
-                        <h4 className='text-md font-semibold text-gray-900 dark:text-white mb-4'>General settings</h4>
-                        <SettingsCheckbox label='Public share' isChecked={settings.publicShare}
-                            callback={(event) => handleChange('publicShare', event.target.checked)}
-                            info='When enabled files will be shared outside of your local network using a public url, useful if you want to share things with your friends ✨'
-                        />
-                        <SettingsCheckbox label='Dark theme' isChecked={settings.theme === 'dark'}
-                            callback={(event) => handleChange('theme', event.target.checked ? 'dark' : 'light')}
-                        />
-                    </section>
+                <section className="space-y-4 mb-6">
+                    <h4 className='text-md font-semibold text-gray-900 dark:text-white'>{T('settings.general_settings')}</h4>
+                    <SettingsCheckbox label={T('settings.public_share')} isChecked={settings.publicShare}
+                        onChange={(event) => handleChange('publicShare', event.target.checked)}
+                        info={T('settings.public_share_tooltip')}
+                    />
+                    <SettingsCheckbox label={T('settings.dark_theme')} isChecked={settings.theme === 'dark'}
+                        onChange={(event) => handleChange('theme', event.target.checked ? 'dark' : 'light')}
+                    />
+                </section>
 
-                    <section>
-                        <h4 className='text-md font-semibold text-gray-900 dark:text-white mb-2'>Auth credentials</h4>
-                        <SettingsCheckbox isChecked={settings.auth?.enabled}
-                            callback={(event) => handleChange('auth', {
-                                enabled: event.target.checked,
-                                username: settings.auth?.username,
-                                password: settings.auth?.password
-                            })}
-                        />
-                        { settings.auth?.enabled && <>
-                            <fieldset>
-                                <input
-                                    type="text" placeholder="User name"
-                                    value={settings.auth?.username ?? ''}
-                                    onChange={(event) => handleChange('auth', {
-                                        enabled: settings.auth?.enabled,
-                                        username: event.target.value || null,
-                                        password: settings.auth?.password
-                                    })}
-                                    className="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-                                <input
-                                    type="password" placeholder="Password"
-                                    value={settings.auth?.password ?? ''}
-                                    onChange={(event) => handleChange('auth', {
-                                        enabled: settings.auth?.enabled,
-                                        password: event.target.value || null,
-                                        username: settings.auth?.username
-                                    })}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-                                { ((settings.auth?.username && !settings.auth?.password) || (settings.auth?.password && !settings.auth?.username)) &&
-                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500 font-medium">You need to add both username and password for auth to be enabled.</p> }
-                            </fieldset>
-                        </> }
-                    </section>
+                <section className="space-y-4 mb-6">
+                    <h4 className='text-md font-semibold text-gray-900 dark:text-white mb-2'>{T('settings.auth')}</h4>
+                    <SettingsCheckbox isChecked={settings.auth?.enabled}
+                        onChange={(event) => handleChange('auth', {
+                            enabled: event.target.checked,
+                            username: settings.auth?.username,
+                            password: settings.auth?.password
+                        })}
+                    />
+                    { settings.auth?.enabled && <>
+                        <fieldset>
+                            <TextInput className='mb-2' name="username"
+                                placeholder={T('settings.auth_username')}
+                                value={settings.auth?.username ?? ''}
+                                onChange={debounce((event: React.ChangeEvent<HTMLInputElement>) => handleChange('auth', {
+                                    enabled: settings.auth?.enabled,
+                                    username: event.target.value || null,
+                                    password: settings.auth?.password
+                                }), 750)}
+                            />
+                            <TextInput name="password"
+                                placeholder={T('settings.auth_password')}
+                                value={settings.auth?.password ?? ''}
+                                onChange={debounce((event: React.ChangeEvent<HTMLInputElement>) => handleChange('auth', {
+                                    enabled: settings.auth?.enabled,
+                                    password: event.target.value || null,
+                                    username: settings.auth?.username
+                                }), 750)}
+                            />
+                            { ((settings.auth?.username && !settings.auth?.password) || (settings.auth?.password && !settings.auth?.username)) &&
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500 font-medium">{T('settings.auth_warning')}</p> }
+                        </fieldset>
+                    </> }
+                </section>
 
-                    <section>
-                        <h4 className='text-md font-semibold text-gray-900 dark:text-white mb-2'>Other settings</h4>
-                        <SettingsCheckbox label='Shortcuts' isChecked={settings.shortcuts}
-                            callback={(event) => handleChange('shortcuts', event.target.checked)}
-                        />
-                    </section>
-                </>
+                <section className="space-y-4 mb-6">
+                    <h4 className='text-md font-semibold text-gray-900 dark:text-white mb-2'>{T('settings.other_settings')}</h4>
+                    <SettingsCheckbox label={T('settings.shortcuts')} isChecked={settings.shortcuts}
+                        onChange={(event) => handleChange('shortcuts', event.target.checked)}
+                    />
+                </section>
+
+                <section className="space-y-4">
+                    <h4 className='text-md font-semibold text-gray-900 dark:text-white'>{T('settings.language')}</h4>
+                    <LanguageSelector T={T} onChange={(locale: Locale) => handleChange('locale', locale)} />
+                </section>
             </Modal.Body>
         </Modal>
     )
