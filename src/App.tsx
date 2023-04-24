@@ -3,7 +3,7 @@ import Dropzone from '@components/Dropzone'
 import Nav from '@components/Nav'
 import SharingModal from '@components/Sharing'
 import { ipcRenderer } from 'electron'
-import { History, LoaderState, ShareEvents } from '@shared'
+import { History, LoaderState, Locale, ShareEvents } from '@shared'
 import useLocalStorage from './hooks/useLocalStorage'
 import HistoryTable from '@components/HistoryTable'
 import Loader from '@components/Loader'
@@ -14,7 +14,7 @@ function App() {
   const [settings, toggleSettings] = useState(false)
   const [shared, setShared] = useState<string | null>(null)
   const {value: history, setValue: setHistory} = useLocalStorage<History>('history', [])
-  const {T} = useT()
+  const {T, locale} = useT()
 
   const updateSharedUrl = (_: any, url: string): void => {
     ipcRenderer.emit(LoaderState.StopLoading)
@@ -52,7 +52,7 @@ function App() {
       </nav>
       <main className='space-y-6 pb-20'>
         <Dropzone onUpload={onUpload} />
-        <HistoryTable history={history} />
+        <HistoryTable history={history} locale={locale as Locale}/>
       </main>
       <SettingsModal T={T} show={settings} onClose={() => toggleSettings(false)}/>
       <SharingModal shared={shared} onStop={stopSharing} />

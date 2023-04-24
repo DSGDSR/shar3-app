@@ -1,19 +1,18 @@
 import { FolderIcon } from "@icons"
-import { History, HistoryItem, ShareEvents } from "@shared"
-import { RelativeTime } from "@utils"
+import { History, HistoryItem, Locale, ShareEvents } from "@shared"
+import { from } from "@utils"
 import { ipcRenderer } from "electron"
 import { useState } from "react"
 
 interface HistoryProps {
     history: History
+    locale: Locale
 }
 
 const evenClasses = 'flex py-[1.15rem] border-b bg-gray-100 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 hover:cursor-pointer first:rounded-t-md last:rounded-b-md'
 const oddClasses = 'flex py-[1.15rem] bg-white bg-gray-50 border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 hover:cursor-pointer last:rounded-b-md'
 
-const relativeTime = new RelativeTime()
-
-const HistoryTable = ({history}: HistoryProps) => {
+const HistoryTable = ({history, locale}: HistoryProps) => {
     const [visibleItems, setVisibleItems] = useState(5)
     const getFolderName = (path: string) => path.slice(path.lastIndexOf('/') + 1)
 
@@ -38,7 +37,7 @@ const HistoryTable = ({history}: HistoryProps) => {
                             </div>
                         </th>
                         <td className="flex items-center pr-6 pl-4 w-2/6 lg:w-1/6 justify-end">
-                            {relativeTime.from(new Date(historyItem.sharedAt))}
+                            {from(locale, new Date(historyItem.sharedAt))}
                         </td>
                     </tr>
                 }) }
