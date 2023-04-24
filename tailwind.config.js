@@ -9,7 +9,11 @@ module.exports = {
     path.join(__dirname, 'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}')
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'xs': '500px',
+      },
+    }
   },
   plugins: [],
 }
