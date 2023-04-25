@@ -2,7 +2,8 @@
     "locales": {
         "en": "English",
         "es": "Spanish",
-        "de": "Deutch"
+        "de": "Deutch",
+        "fr": "French"
     },
     "nav": {
         "theme": "Theme",

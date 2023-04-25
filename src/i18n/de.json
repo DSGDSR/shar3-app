@@ -2,7 +2,8 @@
     "locales": {
         "en": "DE: English",
         "es": "DE: Spanish",
-        "de": "DE: Deutch"
+        "de": "DE: Deutch",
+        "fr": "DE: French"
     },
     "nav": {
         "theme": "DE: Theme",

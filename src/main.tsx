@@ -7,6 +7,7 @@ import './index.css'
 import en from "./i18n/en.json"
 import es from "./i18n/es.json"
 import de from "./i18n/de.json"
+import fr from "./i18n/fr.json"
 import { Locale, Settings } from '@shared'
 
 let locale: Locale = 'en'
@@ -22,7 +23,7 @@ try {
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Talkr languages={{en, es, de}} defaultLanguage={locale || 'en'}>
+    <Talkr languages={{en, es, de, fr}} defaultLanguage={locale || 'en'}>
       <App />
     </Talkr>
   </React.StrictMode>,
