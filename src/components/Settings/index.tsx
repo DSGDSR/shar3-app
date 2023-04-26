@@ -2,7 +2,7 @@ import { Locale, Settings, Translator } from '@shared';
 import { useLocalStorage, useTheme } from '@hooks';
 import SettingsCheckbox from './Checkbox';
 import { Modal } from 'flowbite-react';
-import LanguageSelector from '@components/LanguageSelector';
+import LanguageSelector from './LanguageSelector';
 import TextInput from './TextInput';
 import { debounce } from '@utils';
 

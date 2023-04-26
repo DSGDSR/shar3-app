@@ -2,7 +2,8 @@
     "locales": {
         "en": "Inglés",
         "es": "Español",
-        "de": "Alemán"
+        "de": "Alemán",
+        "fr": "Francés"
     },
     "nav": {
         "theme": "Tema",
