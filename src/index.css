@@ -19,6 +19,19 @@ html.dark body {
   direction: rtl;
 }
 
+/* TAB USABILITY */
+html :focus {
+  outline: 2px solid #111827;
+}
+html.dark :focus {
+  outline: 2px solid #f9fafb;
+}
+
+/* When mouse is detected, ALL focused elements have outline removed. */
+html.using-mouse :focus {
+  outline: none;
+}
+
 /**::-webkit-scrollbar {
   width: 12px;
 }
@@ -37,3 +50,13 @@ html.dark body {
 html.dark *::-webkit-scrollbar-thumb {
   background-color: #898f9a;
 }*/
+
+/* sonner toast always centered */
+[data-sonner-toaster] {
+  width: 356px !important;
+}
+
+[data-sonner-toaster][data-x-position=center] {
+  left: 50% !important;
+  transform: translate(-50%) !important;
+}
