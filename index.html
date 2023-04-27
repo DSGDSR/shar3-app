@@ -15,6 +15,18 @@
           document.documentElement.classList.add('dark');
       }
     </script>
+    <script defer>
+      document.body.addEventListener('mousedown', function() {
+        document.documentElement.classList.add('using-mouse');
+      });
+
+      // Re-enable focus styling when Tab is pressed
+      document.body.addEventListener('keydown', function(event) {
+        if (event.keyCode === 9) {
+          document.documentElement.classList.remove('using-mouse');
+        }
+      });
+    </script>
   </head>
   <body>
     <div id="root" class='p-6'></div>
