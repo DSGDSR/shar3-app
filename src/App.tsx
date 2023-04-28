@@ -9,12 +9,15 @@ import HistoryTable from '@components/HistoryTable'
 import Loader from '@components/Loader'
 import SettingsModal from '@components/Settings'
 import { useT } from 'talkr'
+import useConnection from './hooks/useConnection'
+import { Toaster } from 'sonner'
 
 function App() {
   const [settings, toggleSettings] = useState(false)
   const [shared, setShared] = useState<string | null>(null)
-  const {value: history, setValue: setHistory} = useLocalStorage<History>('history', [])
-  const {T, locale} = useT()
+  const { value: history, setValue: setHistory } = useLocalStorage<History>('history', [])
+  const isConnected = useConnection()
+  const { T, locale } = useT()
 
   const updateSharedUrl = (_: any, url: string): void => {
     ipcRenderer.emit(LoaderState.StopLoading)
@@ -35,7 +38,7 @@ function App() {
     setHistory((currHistory) => ([{
       path,
       sharedAt: Date.now()
-    }, ...currHistory]));
+    }, ...currHistory]))
   }
 
   const stopSharing = () => {
@@ -45,14 +48,15 @@ function App() {
 
   return (
     <>
+      <Toaster richColors position="top-center"/>
       <Loader/>
 
       <nav>
-        <Nav toggleSettings={toggleSettings} T={T}/>
+        <Nav toggleSettings={toggleSettings} T={T} isConnected={isConnected} />
       </nav>
       <main className='space-y-6 pb-20'>
-        <Dropzone onUpload={onUpload} />
-        <HistoryTable history={history} locale={locale as Locale}/>
+        <Dropzone onUpload={onUpload} T={T} isConnected={isConnected} />
+        <HistoryTable history={history} locale={locale as Locale} />
       </main>
       <SettingsModal T={T} show={settings} onClose={() => toggleSettings(false)}/>
       <SharingModal shared={shared} onStop={stopSharing} />
