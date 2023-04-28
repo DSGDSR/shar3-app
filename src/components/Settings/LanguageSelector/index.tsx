@@ -49,6 +49,12 @@ const LanguageSelector = ({T, onChange}: LanguageSelectorProps) => {
         setTimeout(() => document.addEventListener('click', closeSelector))
     }
 
+    const selectLocale = (lang: string) => {
+        setLocale(lang)
+        onChange(lang as Locale)
+        setOpen(false)
+    }
+
     return <div className="flex relative">
         <button type="button" onClick={openSelector} className="inline-flex p-2 items-center font-medium justify-center text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
             { locale === 'en' && <English w={5} h={5} text={T(`locales.${locale}`)}/> }
@@ -61,10 +67,15 @@ const LanguageSelector = ({T, onChange}: LanguageSelectorProps) => {
                 {
                     Object.keys(languages).map((lang) => {
                         return <li key={lang}>
-                            <span onClick={() => {
-                                setLocale(lang)
-                                onChange(lang as Locale)
-                            }} className={`${locale === lang ? 'hidden' : null} cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white`} role="menuitem">
+                            <span 
+                                tabIndex={locale === lang ? -1 : 1} 
+                                onClick={() => selectLocale(lang as Locale)}
+                                onKeyDown={(event) => {
+                                    if (['Enter', 'Space'].includes(event?.code)) selectLocale(lang as Locale)
+                                }}
+                                className={`${locale === lang ? 'hidden' : null} cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white`}
+                                role="menuitem"
+                            >
                                 <div className="inline-flex items-center">
                                     {languages[lang as Locale](T(`locales.${lang}`))}
                                 </div>

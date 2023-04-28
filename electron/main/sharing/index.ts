@@ -1,11 +1,12 @@
 import { Settings, ShareEvents } from "../../../shared"
 import config from "./config"
-import { BrowserWindow, IpcMainInvokeEvent, ipcMain, shell } from 'electron'
+import { BrowserWindow, IpcMainInvokeEvent, dialog, ipcMain, shell } from 'electron'
 const os = require('node:os')
 const portfinder = require('portfinder')
 const express = require('express')
 const serveIndex = require('serve-index')
 const basicAuth = require('express-basic-auth');
+const fs = require('fs');
 const tunnelmole = import('tunnelmole');
 
 let server;
@@ -50,7 +51,11 @@ const startServer = async (event: IpcMainInvokeEvent, path: string, window: Brow
     // Add auth if configured
     setAuthMiddleware(app, settings)
 
-    app.use('/', express.static(path), serveIndex(path, { 'icons': true }))
+    if (fs.lstatSync(path).isDirectory() ) {
+        app.use('/', express.static(path), serveIndex(path, { 'icons': true }))
+    } else {
+        app.get('/', (req, res) =>  res.sendFile(path))
+    }
     server = app.listen(port)
 
     let url;
@@ -64,10 +69,19 @@ const startServer = async (event: IpcMainInvokeEvent, path: string, window: Brow
     event.sender.send(ShareEvents.SendShareUrl, url)
 }
 
+const openExplorer = (window: BrowserWindow, event: IpcMainInvokeEvent) => {
+    dialog.showOpenDialog(window, {
+        properties: ['openFile', 'openDirectory']
+    }).then((uploadEvent) => {
+        event.sender.send(ShareEvents.SelectPath, uploadEvent)
+    }).catch(() => {
+        // TODO error
+    })
+}
+
 export default (window: BrowserWindow) => {
+    ipcMain.handle(ShareEvents.OpenExplorer, (event) => openExplorer(window, event))
     ipcMain.handle(ShareEvents.StopSharing, closeServer)
-
     ipcMain.handle(ShareEvents.ShareDirectory, (event, path) => startServer(event, path, window))
-
     ipcMain.handle('open-link', (_event, url: string) => shell.openExternal(url))
 }
