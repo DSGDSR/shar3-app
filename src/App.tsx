@@ -4,12 +4,11 @@ import Nav from '@components/Nav'
 import SharingModal from '@components/Sharing'
 import { ipcRenderer } from 'electron'
 import { History, LoaderState, Locale, ShareEvents } from '@shared'
-import useLocalStorage from './hooks/useLocalStorage'
+import { useLocalStorage, useConnection } from '@hooks'
 import HistoryTable from '@components/HistoryTable'
 import Loader from '@components/Loader'
 import SettingsModal from '@components/Settings'
 import { useT } from 'talkr'
-import useConnection from './hooks/useConnection'
 import { Toaster } from 'sonner'
 
 function App() {
@@ -56,9 +55,9 @@ function App() {
       </nav>
       <main className='space-y-6 pb-20'>
         <Dropzone onUpload={onUpload} T={T} isConnected={isConnected} />
-        <HistoryTable history={history} locale={locale as Locale} />
+        { history?.length ? <HistoryTable history={history} locale={locale as Locale} /> : <></> }
       </main>
-      <SettingsModal T={T} show={settings} onClose={() => toggleSettings(false)}/>
+      <SettingsModal T={T} show={settings} onClose={() => toggleSettings(false)} />
       <SharingModal shared={shared} onStop={stopSharing} />
       
       {/*<Update/>*/}

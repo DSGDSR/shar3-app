@@ -11,21 +11,22 @@
       const settings = localStorage.getItem('settings');
       const theme = settings ? JSON.parse(settings).theme : null;
 
-      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      if (theme === 'dark' || !theme) {
           document.documentElement.classList.add('dark');
       }
-    </script>
-    <script defer>
-      document.body.addEventListener('mousedown', function() {
-        document.documentElement.classList.add('using-mouse');
-      });
 
-      // Re-enable focus styling when Tab is pressed
-      document.body.addEventListener('keydown', function(event) {
-        if (event.keyCode === 9) {
-          document.documentElement.classList.remove('using-mouse');
-        }
-      });
+      window.onload = function() {
+        document.body.addEventListener('mousedown', function() {
+          document.documentElement.classList.add('using-mouse');
+        });
+  
+        // Re-enable focus styling when Tab is pressed
+        document.body.addEventListener('keydown', function(event) {
+          if (event.keyCode === 9) {
+            document.documentElement.classList.remove('using-mouse');
+          }
+        });
+      }
     </script>
   </head>
   <body>
