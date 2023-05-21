@@ -1,6 +1,6 @@
 import { FolderIcon } from "@icons"
 import { History, HistoryItem, Locale, ShareEvents } from "@shared"
-import { from } from "@utils"
+import { from, isWindows } from "@utils"
 import { ipcRenderer } from "electron"
 import { useState } from "react"
 
@@ -11,10 +11,11 @@ interface HistoryProps {
 
 const evenClasses = 'flex py-[1.15rem] border-b bg-gray-100 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 hover:cursor-pointer first:rounded-t-md last:rounded-b-md'
 const oddClasses = 'flex py-[1.15rem] bg-white bg-gray-50 border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 hover:cursor-pointer last:rounded-b-md'
+const pathSlash = isWindows() ? '\\' : '/'
 
 const HistoryTable = ({history, locale}: HistoryProps) => {
     const [visibleItems, setVisibleItems] = useState(5)
-    const getFolderName = (path: string) => path.slice(path.lastIndexOf('/') + 1)
+    const getFolderName = (path: string) => path.slice(path.lastIndexOf(pathSlash) + 1)
 
     const shareHistoryItem = (item: HistoryItem) => ipcRenderer.invoke(ShareEvents.ShareDirectory, item.path)
 
