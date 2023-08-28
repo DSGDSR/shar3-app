@@ -7,7 +7,6 @@ const express = require('express')
 const serveIndex = require('serve-index')
 const basicAuth = require('express-basic-auth');
 const fs = require('fs');
-const tunnelmole = import('tunnelmole');
 
 let server;
 
@@ -60,8 +59,10 @@ const startServer = async (event: IpcMainInvokeEvent, path: string, window: Brow
 
     let url;
     if (settings.publicShare) {
-        const tunnelUrl = await (await tunnelmole).tunnelmole({ port })
-        url = `${tunnelUrl}?timeToken=${Date.now()}`
+        //WIN url = `${await (await import('ngrok')).connect({ addr: port, authtoken: import.meta.env.VITE_NGROK_API_TOKEN })}?timeToken=${Date.now()}`
+        
+        //MAC const tunnelUrl = await (await import('tunnelmole')).tunnelmole({ port })
+        //MAC url = `${tunnelUrl}?timeToken=${Date.now()}`
     } else {
         url = `http://${getLocalAddress()}:${port}?timeToken=${Date.now()}`
     }
