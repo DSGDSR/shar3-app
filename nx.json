@@ -9,7 +9,8 @@
           "lint",
           "test",
           "e2e",
-          "build-storybook"
+          "build-storybook",
+          "check"
         ],
         "accessToken": "ZTI2NTM5ZmItZDM3YS00MWY1LWIxNzAtZGIzYThmN2RkM2RjfHJlYWQtd3JpdGU="
       }
@@ -37,6 +38,12 @@
         "{projectRoot}/.storybook/**/*",
         "{projectRoot}/tsconfig.storybook.json"
       ]
+    },
+    "check": {
+      "inputs": ["production", "^production"]
+    },
+    "e2e": {
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
@@ -65,5 +72,7 @@
         "unitTestRunner": "none"
       }
     }
-  }
+  },
+  "plugins": ["@nxtensions/astro"],
+  "defaultProject": "website"
 }
