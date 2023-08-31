@@ -3,14 +3,14 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import { fileURLToPath } from 'node:url';
 
-import vercel from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel/serverless';
 
 // https://astro.build/config
 export default defineConfig({
-  outDir: '../../dist/packages/website',
+  outDir: '../../dist/website',
   integrations: [react(), tailwind({
     configFile: fileURLToPath(new URL('./tailwind.config.cjs', import.meta.url))
   })],
-  output: 'static',
+  output: 'server',
   adapter: vercel()
 });

@@ -1,7 +1,7 @@
 {
   "name": "icons",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/icons/src",
+  "sourceRoot": "libs/icons/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,7 +9,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/icons/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/icons/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "build": {
@@ -17,7 +17,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/packages/icons"
+        "outputPath": "dist/libs/icons"
       },
       "configurations": {
         "development": {
@@ -32,7 +32,7 @@
       "executor": "@nx/storybook:storybook",
       "options": {
         "port": 4400,
-        "configDir": "packages/icons/.storybook"
+        "configDir": "libs/icons/.storybook"
       },
       "configurations": {
         "ci": {
@@ -45,7 +45,7 @@
       "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/icons",
-        "configDir": "packages/icons/.storybook"
+        "configDir": "libs/icons/.storybook"
       },
       "configurations": {
         "ci": {

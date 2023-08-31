@@ -28,7 +28,7 @@
     "@nx/vite": "16.7.4",
     "@nx/web": "16.7.4",
     "@nx/workspace": "16.7.4",
-    "@nxtensions/astro": "^16.2.0",
+    "@nxtensions/astro": "16.2.0",
     "@storybook/addon-essentials": "^7.2.1",
     "@storybook/addon-interactions": "^7.2.1",
     "@storybook/core-server": "^7.2.1",
@@ -65,3 +65,4 @@
     "vitest": "~0.32.0"
   }
 }
+
