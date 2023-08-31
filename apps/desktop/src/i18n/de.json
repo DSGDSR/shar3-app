@@ -1,0 +1,56 @@
+{
+    "locales": {
+        "en": "DE: English",
+        "es": "DE: Spanish",
+        "de": "DE: Deutch",
+        "fr": "DE: French"
+    },
+    "generic": {
+        "or": "DE: or",
+        "click_select": "DE: Click to select",
+        "or_drag": "DE: or drag a file/folder here",
+        "share_mail_subject": "DE: [Shar3]%20I%20am%20sharing%20with%20you%20some%20files",
+        "share_url": "DE: Hey!%20I%20am%20sharing%20with%20you%20some%20files%20from%20Shar3%20app%3A",
+        "share": "DE: Share on:",
+        "copy_url": "DE: Copy url",
+        "copy_image": "DE: Copy image",
+        "qr_copied": {
+            "loading": "DE: Copying QR to clipboard...",
+            "success": "DE: QR image copied successfuly!",
+            "error": "DE: QR image could not be copied. Please try again."
+        },
+        "url_copied": {
+            "loading": "DE: Copying url to clipboard...",
+            "success": "DE: Url copied successfuly!",
+            "error": "DE: Url could not be copied. Please try again."
+        }
+    },
+    "contextmenu": {
+        "reshare": "DE: Reshare",
+        "open_folder": "DE: Open folder",
+        "delete_entry": "DE: Delete entry"
+    },
+    "nav": {
+        "report_bug": "DE: Report bug",
+        "new_item": "DE: Upload new",
+        "settings": "DE: Settings"
+    },
+    "toasts": {
+        "no_connection": "DE: Not connected to network, you can not share files",
+        "delete_entry": "DE: History entry deleted for '__filename__'"
+    },
+    "settings": {
+        "title": "DE: Settings",
+        "general_settings": "DE: General settings",
+        "public_share": "DE: Public share",
+        "public_share_tooltip": "DE: When enabled files will be shared outside of your local network using a public url, useful if you want to share things with your friends ✨",
+        "dark_theme": "DE: Dark theme",
+        "auth": "DE: Auth credentials",
+        "auth_username": "DE: User name",
+        "auth_password": "DE: Password",
+        "auth_warning": "DE: You need to add both username and password for auth to be enabled.",
+        "other_settings": "DE: Other settings",
+        "shortcuts": "DE: Shortcuts",
+        "language": "DE: Language"
+    }
+}

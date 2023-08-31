@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <title>Shar3</title>
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      const settings = localStorage.getItem('settings');
+      const theme = settings ? JSON.parse(settings).theme : null;
+
+      if (theme === 'dark' || !theme) {
+          document.documentElement.classList.add('dark');
+      }
+
+      window.onload = function() {
+        document.body.addEventListener('mousedown', function() {
+          document.documentElement.classList.add('using-mouse');
+        });
+  
+        // Re-enable focus styling when Tab is pressed
+        document.body.addEventListener('keydown', function(event) {
+          if (event.keyCode === 9) {
+            document.documentElement.classList.remove('using-mouse');
+          }
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root" class='p-6'></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

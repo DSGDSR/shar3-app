@@ -1,0 +1,56 @@
+{
+    "locales": {
+        "en": "English",
+        "es": "Spanish",
+        "de": "Deutch",
+        "fr": "French"
+    },
+    "generic": {
+        "or": "or",
+        "click_select": "Click to select",
+        "or_drag": " or drag a file/folder here",
+        "share_mail_subject": "[Shar3]%20I%20am%20sharing%20with%20you%20some%20files",
+        "share_url": "Hey!%20I%20am%20sharing%20with%20you%20some%20files%using%20Shar3%20app%3A",
+        "share": "Share on:",
+        "copy_url": "Copy url",
+        "copy_image": "Copy image",
+        "qr_copied": {
+            "loading": "Copying QR to clipboard...",
+            "success": "QR image copied successfuly!",
+            "error": "QR image could not be copied. Please try again."
+        },
+        "url_copied": {
+            "loading": "Copying url to clipboard...",
+            "success": "Url copied successfuly!",
+            "error": "Url could not be copied. Please try again."
+        }
+    },
+    "contextmenu": {
+        "reshare": "Reshare",
+        "open_folder": "Open folder",
+        "delete_entry": "Delete from history"
+    },
+    "nav": {
+        "report_bug": "Report bug",
+        "new_item": "Upload new",
+        "settings": "Settings"
+    },
+    "toasts": {
+        "no_connection": "Not connected to network, you can not share files",
+        "delete_entry": "History entry deleted for '__filename__'"
+    },
+    "settings": {
+        "title": "Settings",
+        "general_settings": "General settings",
+        "public_share": "Public share",
+        "public_share_tooltip": "When enabled files will be shared outside of your local network using a public url, useful if you want to share things with your friends ✨",
+        "dark_theme": "Dark theme",
+        "auth": "Auth credentials",
+        "auth_username": "User name",
+        "auth_password": "Password",
+        "auth_warning": "You need to add both username and password for auth to be enabled",
+        "other_settings": "Other settings",
+        "shortcuts": "Shortcuts",
+        "language": "Language"
+    }
+}

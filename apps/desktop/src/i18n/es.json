@@ -1,0 +1,56 @@
+{
+    "locales": {
+        "en": "Inglés",
+        "es": "Español",
+        "de": "Alemán",
+        "fr": "Francés"
+    },
+    "generic": {
+        "or": "o",
+        "click_select": "Click para seleccionar",
+        "or_drag": " o arrastra un fichero",
+        "share_mail_subject": "ES: [Shar3]%20I%20am%20sharing%20with%20you%20some%20files",
+        "share_url": "ES: Hey!%20I%20am%20sharing%20with%20you%20some%20files%20from%20Shar3%20app%3A",
+        "share": "Compartir:",
+        "copy_url": "Copiar enlace",
+        "copy_image": "Copiar imagen",
+        "qr_copied": {
+            "loading": "Copiando QR al portapapeles...",
+            "success": "¡Imagen del QR copiada al portapapeles!",
+            "error": "La imagen del QR no pudo copiarse. Por favor inténtelo de nuevo."
+        },
+        "url_copied": {
+            "loading": "Copiando enlace al portapapeles...",
+            "success": "¡Enlace copiado al portapapeles!",
+            "error": "El enlace no pudo copiarse. Por favor inténtelo de nuevo."
+        }
+    },
+    "contextmenu": {
+        "reshare": "Compartir",
+        "open_folder": "Abrir carpeta",
+        "delete_entry": "Borrar del historial"
+    },
+    "nav": {
+        "report_bug": "Reportar bug",
+        "new_item": "Subir nuevo",
+        "settings": "Opciones"
+    },
+    "toasts": {
+        "no_connection": "Sin conexión a internet, no se pueden compartir ficheros",
+        "delete_entry": "Histórico eliminado para el fichero '__filename__'"
+    },
+    "settings": {
+        "title": "Configuración",
+        "general_settings": "Opciones generales",
+        "public_share": "Compartir publicamente",
+        "public_share_tooltip": "Si lo activas tus ficheros se compartirán fuera de la red local, accesible desde cualquier lugar. Muy útil si quieres compartir cosas con tus amigos ✨",
+        "dark_theme": "Tema oscuro",
+        "auth": "Autentificación",
+        "auth_username": "Nombre de usuario",
+        "auth_password": "Contraseña",
+        "auth_warning": "Es obligatorio añadir un usuario y una contraseña",
+        "other_settings": "Otras opciones",
+        "shortcuts": "Atajos de teclado",
+        "language": "Idioma"
+    }
+}

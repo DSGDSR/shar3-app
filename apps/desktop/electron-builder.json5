@@ -1,0 +1,63 @@
+{
+  "productName": "Shar3",
+  "appId": "me.dsgdsr.shar3",
+  "asar": true,
+  "asarUnpack": "**\\*.{node,dll}",
+  "directories": {
+    "output": "release/${version}"
+  },
+  "files": [
+    "./dist-electron/**/*",
+    "./dist/**/*"
+  ],
+  "mac": {
+    "target": {
+      "target": "default",
+      "arch": [
+        "arm64",
+        "x64"
+      ]
+    },
+    "type": "distribution",
+    "hardenedRuntime": true,
+    "entitlements": "public/entitlements.mac.plist",
+    "entitlementsInherit": "public/entitlements.mac.plist",
+    "gatekeeperAssess": false
+  },
+  "dmg": {
+    "contents": [
+      {
+        "x": 130,
+        "y": 220
+      },
+      {
+        "x": 410,
+        "y": 220,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  },
+  "win": {
+    "target": [
+      "nsis"
+    ]
+  },
+  "linux": {
+    "target": [
+      "AppImage"
+    ],
+    "category": "Development"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": false
+  },
+  "publish": {
+    "provider": "github",
+    "owner": "dsgdsr",
+    "repo": "shar3-app"
+  }
+}

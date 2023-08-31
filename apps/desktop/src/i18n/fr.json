@@ -1,0 +1,56 @@
+{
+    "locales": {
+        "en": "Anglais",
+        "es": "Espagnol",
+        "de": "FR: Deutch",
+        "fr": "Français"
+    },
+    "generic": {
+        "or": "FR: or",
+        "click_select": "FR: Click to select",
+        "or_drag": "FR: or drag a file/folder here",
+        "share_mail_subject": "FR: [Shar3]%20I%20am%20sharing%20with%20you%20some%20files",
+        "share_url": "FR: Hey!%20I%20am%20sharing%20with%20you%20some%20files%20from%20Shar3%20app%3A",
+        "share": "FR: Share on:",
+        "copy_url": "FR: Copy url",
+        "copy_image": "FR: Copy image",
+        "qr_copied": {
+            "loading": "FR: Copying QR to clipboard...",
+            "success": "FR: QR image copied successfuly!",
+            "error": "FR: QR image could not be copied. Please try again."
+        },
+        "url_copied": {
+            "loading": "FR: Copying url to clipboard...",
+            "success": "FR: Url copied successfuly!",
+            "error": "FR: Url could not be copied. Please try again."
+        }
+    },
+    "contextmenu": {
+        "reshare": "FR: Reshare",
+        "open_folder": "FR: Open folder",
+        "delete_entry": "FR: Delete entry"
+    },
+    "nav": {
+        "report_bug": "FE: Report bug",
+        "new_item": "FR: Upload new",
+        "settings": "FR: Settings"
+    },
+    "toasts": {
+        "no_connection": "FR: Not connected to network, you can not share files",
+        "delete_entry": "FR: History entry deleted for '__filename__'"
+    },
+    "settings": {
+        "title": "FR: Settings",
+        "general_settings": "FR: General settings",
+        "public_share": "FR: Public share",
+        "public_share_tooltip": "FR: When enabled files will be shared outside of your local network using a public url, useful if you want to share things with your friends ✨",
+        "dark_theme": "FR: Dark theme",
+        "auth": "FR: Auth credentials",
+        "auth_username": "FR: User name",
+        "auth_password": "FR: Password",
+        "auth_warning": "FR: You need to add both username and password for auth to be enabled.",
+        "other_settings": "FR: Other settings",
+        "shortcuts": "FR: Shortcuts",
+        "language": "FR: Language"
+    }
+}
