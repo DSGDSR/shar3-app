@@ -11,6 +11,7 @@
         "or_drag": " o arrastra un fichero",
         "share_mail_subject": "ES: [Shar3]%20I%20am%20sharing%20with%20you%20some%20files",
         "share_url": "ES: Hey!%20I%20am%20sharing%20with%20you%20some%20files%20from%20Shar3%20app%3A",
+        "navigate_url": "Click para navegar al enlace",
         "share": "Compartir:",
         "copy_url": "Copiar enlace",
         "copy_image": "Copiar imagen",
@@ -23,7 +24,8 @@
             "loading": "Copiando enlace al portapapeles...",
             "success": "¡Enlace copiado al portapapeles!",
             "error": "El enlace no pudo copiarse. Por favor inténtelo de nuevo."
-        }
+        },
+        "stop_share": "Parar de compartir"
     },
     "contextmenu": {
         "reshare": "Compartir",
@@ -46,6 +48,7 @@
         "public_share_tooltip": "Si lo activas tus ficheros se compartirán fuera de la red local, accesible desde cualquier lugar. Muy útil si quieres compartir cosas con tus amigos ✨",
         "dark_theme": "Tema oscuro",
         "auth": "Autentificación",
+        "clean_history": "Limpiar el historial",
         "auth_username": "Nombre de usuario",
         "auth_password": "Contraseña",
         "auth_warning": "Es obligatorio añadir un usuario y una contraseña",

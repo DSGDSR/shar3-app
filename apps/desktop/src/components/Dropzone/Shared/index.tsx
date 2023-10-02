@@ -30,7 +30,7 @@ const Shared = ({ shared, onStop, T }: SharedProps) => {
 
     return <div className="flex w-full h-full items-center justify-center py-8 px-9 gap-9 sm:gap-12">
         <div className='flex h-full items-center w-1/2'>
-            <Tooltip content='TR: Click to navigate to url' placement='bottom' arrow={false}>
+            <Tooltip content={T('generic.navigate_url')} placement='bottom' arrow={false}>
                 <QRCode
                     id={qrId}
                     value={shared ?? ''}
@@ -63,7 +63,7 @@ const Shared = ({ shared, onStop, T }: SharedProps) => {
                 </Link>
             </div>
         </div>
-        <StopShare onStop={onStop} />
+        <StopShare onStop={onStop} T={T}/>
     </div>
 }
 

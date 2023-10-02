@@ -11,6 +11,7 @@
         "or_drag": "DE: or drag a file/folder here",
         "share_mail_subject": "DE: [Shar3]%20I%20am%20sharing%20with%20you%20some%20files",
         "share_url": "DE: Hey!%20I%20am%20sharing%20with%20you%20some%20files%20from%20Shar3%20app%3A",
+        "navigate_url": "DE: Click to navigate to url",
         "share": "DE: Share on:",
         "copy_url": "DE: Copy url",
         "copy_image": "DE: Copy image",
@@ -23,7 +24,8 @@
             "loading": "DE: Copying url to clipboard...",
             "success": "DE: Url copied successfuly!",
             "error": "DE: Url could not be copied. Please try again."
-        }
+        },
+        "stop_share": "DE: Stop sharing"
     },
     "contextmenu": {
         "reshare": "DE: Reshare",
@@ -46,6 +48,7 @@
         "public_share_tooltip": "DE: When enabled files will be shared outside of your local network using a public url, useful if you want to share things with your friends ✨",
         "dark_theme": "DE: Dark theme",
         "auth": "DE: Auth credentials",
+        "clean_history": "DE: Clean history",
         "auth_username": "DE: User name",
         "auth_password": "DE: Password",
         "auth_warning": "DE: You need to add both username and password for auth to be enabled.",

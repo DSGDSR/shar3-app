@@ -33,7 +33,7 @@ const Nav = ({toggleSettings, T, isConnected}: NavProps) => {
                 />
                 
                 <div className="flex items-center justify-center">
-                    <Tooltip content={'TR: New upload'} arrow={false} className="!-top-10">
+                    <Tooltip content={T('nav.new_item')} arrow={false} className="!-top-10">
                         <button type="button" onClick={openExplorer} className="inline-flex items-center justify-center w-11 h-11 font-medium bg-primary rounded-full hover:bg-primaryHover group">
                             <PlusIcon/>
                             <span className="sr-only">{T('nav.new_item')}</span>

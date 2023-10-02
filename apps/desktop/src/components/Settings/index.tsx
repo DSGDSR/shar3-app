@@ -110,7 +110,7 @@ const SettingsModal = ({ setHistory, show, onClose }: SettingsModalProps) => {
                 </SettingsSections>
 
                 <SettingsSections title="settings.other_settings">
-                    <Button onClick={clearHistory}>TLimpiar historial{T('settings.clean_history')}</Button>
+                    <Button onClick={clearHistory}>{T('settings.clean_history')}</Button>
                 </SettingsSections>
 
                 <SettingsSections title="settings.language" className="!mb-0">

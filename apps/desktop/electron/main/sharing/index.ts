@@ -97,5 +97,5 @@ export default (window: BrowserWindow) => {
     ipcMain.handle(ShareEvents.ShareDirectory, (event, path) => startServer(event, path, window))
     ipcMain.handle('open-link', (_event, url: string) => shell.openExternal(url))
     ipcMain.handle(ShareEvents.OpenFolder, (_, path: string) => openFolder(path))
-    ipcMain.handle(ShareEvents.ReportBug, () => shell.openExternal("mailto:contact@dsgdsr.me?subject=[Shar3]%20Bug%20found&body="))
+    ipcMain.handle(ShareEvents.ReportBug, () => shell.openExternal("https://github.com/DSGDSR/shar3-app/issues/new")) //"mailto:contact@dsgdsr.me?subject=[Shar3]%20Bug%20found&body="
 }
