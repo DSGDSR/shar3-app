@@ -4,11 +4,15 @@
 A quick preview of Alpha 0.1:
 
 <p align="center">
-  <img src="https://github.com/DSGDSR/shar3-app/assets/9610219/fc99167a-53de-4863-b388-9b01eb0fe749">
+  <img src="https://github.com/DSGDSR/shar3-app/assets/9610219/b7bb0c57-1b00-488c-915f-d90630d36ca0">
 </p>
 
 ## Download
 Current prerelease version Alpha-0.1 available for [Mac](https://github.com/DSGDSR/shar3-app/releases/tag/v0.1-alpha) and [Mac arm64](https://github.com/DSGDSR/shar3-app/releases/tag/v0.1-alpha)
+<br>
+<p align="center">
+  <img src="https://github.com/DSGDSR/shar3-app/assets/9610219/fc99167a-53de-4863-b388-9b01eb0fe749">
+</p>
 <br><br>
 
 ## Generate code
